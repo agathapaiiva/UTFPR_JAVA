@@ -32,6 +32,5 @@ abstract class Pessoa {
 		this.nome = nome;
 	} 
 	
-	
-
+	abstract void mostraClasse();
 }

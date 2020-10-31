@@ -14,11 +14,13 @@ public class Main {
 		a.setRA(10);
 		a.setNome("Aluno Agatha");
 		a.setTurma("Java");
-		
+	
 		System.out.println("RG: " + a.getRG());
 		System.out.println("Nome: " + a.getNome());
 		System.out.println("RA: " + a.getRA());
 		System.out.println("Turma: " + a.getTurma());
+		
+		a.mostraClasse();
 		
 		p.setNome("Jose");
 		p.setRG(2);
@@ -31,6 +33,8 @@ public class Main {
 		System.out.println("RG: " + p.getRG());
 		System.out.println("SIAPE: " + p.getSIAPE());
 		System.out.println("Tituulo: " + p.getTitulo());
+		
+		p.mostraClasse();
 	}
 
 }

@@ -41,6 +41,7 @@ public class Professor extends Pessoa{
 		this.titulo = titulo;
 	}
 	
-	
-
+	public void mostraClasse() {
+		System.out.println("Estou na classe Professor");
+	}
 }

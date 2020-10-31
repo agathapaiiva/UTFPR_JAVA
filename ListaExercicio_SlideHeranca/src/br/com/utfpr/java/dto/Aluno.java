@@ -41,4 +41,8 @@ public class Aluno extends Pessoa{
 		this.turma = turma;
 	}
 	
+	public void mostraClasse() {
+		 System.out.println("Sobrescrevi o método Abstrato de Pessoa. Estou na classe Aluno");
+	}
+
 }
