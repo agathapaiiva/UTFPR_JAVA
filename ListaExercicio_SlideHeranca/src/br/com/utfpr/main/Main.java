@@ -11,9 +11,8 @@ public class Main {
 		Professor p = new Professor();
 		
 		a.setRG(1);
-		a.setNome("Aluna Agatha");
 		a.setRA(10);
-		a.setNome("Aluno Danilo");
+		a.setNome("Aluno Agatha");
 		a.setTurma("Java");
 		
 		System.out.println("RG: " + a.getRG());
