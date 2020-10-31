@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>Exercicio3</name>
+	<name>ListaExercicio_02_ImplanMotor</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -14,11 +14,4 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>Pai.class</name>
-			<type>1</type>
-			<locationURI>PROJECT_LOC/src/Pai.class</locationURI>
-		</link>
-	</linkedResources>
 </projectDescription>
