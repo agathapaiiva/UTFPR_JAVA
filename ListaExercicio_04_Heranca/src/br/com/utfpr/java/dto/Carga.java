@@ -8,7 +8,10 @@ final public class Carga extends Veiculo{
 	private int tara;
 	private int cargaMax;
 	
-	public Carga() {}
+	public Carga() {
+		this.tara = 0;
+		this.cargaMax = 0;
+	}
 	
 	public Carga(int tara, int cargaMax ) {
 		this.tara = tara;

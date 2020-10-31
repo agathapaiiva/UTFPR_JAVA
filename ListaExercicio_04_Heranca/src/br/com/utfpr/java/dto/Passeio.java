@@ -10,7 +10,9 @@ final public class Passeio extends Veiculo{
 	
 	private int qtdePassageiros;
 	
-	public Passeio() {}
+	public Passeio() {
+		this.qtdePassageiros = 0;
+	}
 	
 	public Passeio(int qtdePassageiros) {
 		this.qtdePassageiros = qtdePassageiros;		

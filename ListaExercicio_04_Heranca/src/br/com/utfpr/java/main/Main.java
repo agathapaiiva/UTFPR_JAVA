@@ -1,3 +1,7 @@
+/**
+ * @author agatha-paiva
+ */
+
 package br.com.utfpr.java.main;
 
 import java.util.Scanner;
@@ -7,6 +11,7 @@ import br.com.utfpr.java.dto.Passeio;
 
 public class Main {
 
+	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 		Passeio veiculoDePasseio = new Passeio();
 		Carga veiculoDeCarga = new Carga();
