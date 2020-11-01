@@ -68,6 +68,6 @@ public abstract class Veiculo {
 				"Motor do veículo é: \n" + motor + "\n";
 	}
 	
-	protected abstract float calcVel(float velocMax);
+	public abstract float calcVel(float velocMax);
 
 }
