@@ -1,11 +1,13 @@
 package br.com.utfpr.java.main;
 
+import br.com.utfpr.java.dto.Aluno;
 import br.com.utfpr.java.dto.Professor;
 
 public class InstituicaoEnsinoMain {
 	public static void main(String[] args) {
 		
 		Professor professor = new Professor();
+		Aluno aluno = new Aluno();
 		
 		System.out.println("==== Informações da classe Professor ====\n");
 		professor.setNome("Jose");
@@ -18,6 +20,16 @@ public class InstituicaoEnsinoMain {
 		+ "\nTitulo: " + professor.getTitulo()
 		+ "\nSalario: " + professor.getSalario());
 		
+		System.out.println("\n==== Informações da classe Aluno ====\n");
+		aluno.setNome("Agatha Paiva");
+		aluno.setCPF(410869589);
+		aluno.setCurso("Pós de JAVA");
+		aluno.setRA(326598);
+		
+		System.out.println("Nome: " + aluno.getNome()
+		+ "\nCPF: " + aluno.getCPF()
+		+ "\nCurso: " + aluno.getCurso()
+		+ "\nRA: " + aluno.getRA());
 	}
 
 }
