@@ -46,10 +46,6 @@ final public class Carga extends Veiculo{
 		this.cargaMax = cargaMax;
 	}
 
-	int calcVel(int velocMax) {
-		return 0;
-	}
-
 	@Override
 	public float calcVel(float velocMax) {
 		float result = (float) (velocMax * 100000);
