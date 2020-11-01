@@ -37,6 +37,9 @@ public class Professor extends Pessoa{
 		this.salario = salario;
 	}
 	
-	
+	public void impLocal() {
+		System.out.println("Método da classe FILHA - Professor");
+	//	super.impLocal(); //aponta para classe mae com mecanismo de herança. 
+	}
 	
 }

@@ -7,7 +7,7 @@ package br.com.utfpr.java.dto;
  * Classe MÃE - Classe Generalizada 
  */
 
-public class Pessoa {
+public abstract class Pessoa {
 	private String nome;
 	private int CPF;
 	
@@ -36,6 +36,9 @@ public class Pessoa {
 		CPF = cPF;
 	}
 	
+	public void impLocal() {
+		System.out.println("Método da classe MÃE - Pessoa");
+	}
 	
 
 }

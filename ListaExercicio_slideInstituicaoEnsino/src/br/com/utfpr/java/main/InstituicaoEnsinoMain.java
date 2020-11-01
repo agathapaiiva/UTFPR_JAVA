@@ -1,6 +1,7 @@
 package br.com.utfpr.java.main;
 
 import br.com.utfpr.java.dto.Aluno;
+import br.com.utfpr.java.dto.Pessoa;
 import br.com.utfpr.java.dto.Professor;
 
 public class InstituicaoEnsinoMain {
@@ -8,6 +9,7 @@ public class InstituicaoEnsinoMain {
 		
 		Professor professor = new Professor();
 		Aluno aluno = new Aluno();
+		Pessoa pessoa = new Professor();
 		
 		System.out.println("==== Informações da classe Professor ====\n");
 		professor.setNome("Jose");
@@ -19,6 +21,7 @@ public class InstituicaoEnsinoMain {
 		+ "\nCPF:" + professor.getCPF()
 		+ "\nTitulo: " + professor.getTitulo()
 		+ "\nSalario: " + professor.getSalario());
+		professor.impLocal();
 		
 		System.out.println("\n==== Informações da classe Aluno ====\n");
 		aluno.setNome("Agatha Paiva");
@@ -30,6 +33,10 @@ public class InstituicaoEnsinoMain {
 		+ "\nCPF: " + aluno.getCPF()
 		+ "\nCurso: " + aluno.getCurso()
 		+ "\nRA: " + aluno.getRA());
+		
+		System.out.println("\n==== Tipo Pessoa com comportamento de professor ====\n");
+		pessoa.impLocal();
+				
 	}
 
 }
