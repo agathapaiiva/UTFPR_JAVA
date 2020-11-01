@@ -43,7 +43,7 @@ public class Main {
 			
 			System.out.println("Digite a velocidade do veículo em Km/h ");
 			velocMax = entradaDado.nextFloat();
-			System.out.println(velocMax + " Km/h " + "convertido é : " + 
+			System.out.println("Velocidade digita: " + velocMax + " Km/h " + "convertido: " + 
 					veiculoDePasseio.calcVel(velocMax) + " m/h ");
 			
 			System.out.println("Digite a quantidade de passageiros ");
