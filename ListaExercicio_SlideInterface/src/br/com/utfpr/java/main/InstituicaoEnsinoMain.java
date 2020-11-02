@@ -37,6 +37,7 @@ public class InstituicaoEnsinoMain {
 		System.out.println("\n+++ Executando métodos+++ \n");
 		aluno.impLocal();
 		aluno.mostraMae();
+		aluno.mostraClasse();
 		aluno.contLetra();
 		
 		System.out.println("\n==== Tipo Pessoa com comportamento de professor ====\n");
