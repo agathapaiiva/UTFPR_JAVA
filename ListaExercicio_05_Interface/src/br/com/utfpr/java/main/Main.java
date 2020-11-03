@@ -41,7 +41,7 @@ public class Main {
 
 				switch (op) {
 				case 1:
-					for (int i = 0; i < numeroVeiculos; ) {
+					for (int i = 0; i < numeroVeiculos; i++) {
 						veiculoDePasseio[i] = new Passeio();
 
 						System.out.println("Digite a placa do veículo de Passeio" + " [" + (i + 1) + "]");
@@ -77,14 +77,13 @@ public class Main {
 						
 						if (JOptionPane.showConfirmDialog(null, "Deseja cadastrar outro veículo? ", "WARNING",
 						        JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-							i++;
 						} else {
 						    leitura.entDados();
-						   
-						} break;
+						   break;
+						} 
 					}
 				case 2:
-					for (int i = 0; i < numeroVeiculos;) {
+					for (int i = 0; i < numeroVeiculos; i++) {
 						veiculoDeCarga[i] = new Carga();
 
 						System.out.println("Digite a placa do veículo de Carga" + "[cadastro " + (i + 1) + "]");
@@ -116,13 +115,12 @@ public class Main {
 					
 						if (JOptionPane.showConfirmDialog(null, "Deseja cadastrar outro veículo? ", "WARNING",
 						        JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-							i++;
 						} else {
-						    leitura.entDados();
-						   
-						} break;
+						   leitura.entDados();
+						   break;
+						} 
 					}
-					break;
+					
 				case 3:
 					System.out.println("Imprimir Todos os Veículos de Passeio");
 					break;
