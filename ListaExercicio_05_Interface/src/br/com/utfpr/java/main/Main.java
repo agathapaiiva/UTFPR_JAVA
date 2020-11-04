@@ -27,6 +27,9 @@ public class Main {
 		Passeio[] veiculoDePasseio = new Passeio[numeroVeiculos];
 		Carga[] veiculoDeCarga = new Carga[numeroVeiculos];
 		
+		Passeio[] auxPasseio = null;
+		Carga[] auxCarga = null;
+		
 		Passeio veiculoPasseio = new Passeio();
 		Carga veiculoCarga = new Carga();
 		Leitura leitura = new Leitura();
@@ -75,13 +78,15 @@ public class Main {
 						veiculoDePasseio[i].getMotor().setPotencia(potencia);
 						System.out.println("================================================================\n");
 						
+						auxPasseio = veiculoDePasseio.clone();
+						
 						if (JOptionPane.showConfirmDialog(null, "Deseja cadastrar outro veículo? ", "WARNING",
 						        JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-						} else {
-						    leitura.entDados();
-						   break;
-						} 
+						}else {
+							break;
+						}
 					}
+					break;
 				case 2:
 					for (int i = 0; i < numeroVeiculos; i++) {
 						veiculoDeCarga[i] = new Carga();
@@ -112,20 +117,26 @@ public class Main {
 						potencia = entradaDado.nextInt();
 						veiculoDeCarga[i].getMotor().setPotencia(potencia);
 						System.out.println("================================================================\n");
+						
+						auxCarga = veiculoDeCarga.clone();
 					
 						if (JOptionPane.showConfirmDialog(null, "Deseja cadastrar outro veículo? ", "WARNING",
 						        JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
 						} else {
-						   leitura.entDados();
 						   break;
-						} 
+						}
 					}
-					
+					break;
 				case 3:
-					System.out.println("Imprimir Todos os Veículos de Passeio");
+					for (int i = 0; i < auxPasseio.length; i++) {
+						System.out.println("\nDados do veículo cadastrados pelo usuário " + (i + 1) + "\n" + veiculoDePasseio[i]);
+					}
 					break;
 				case 4:
 					System.out.println("Imprimir Todos os Veículos de Carga");
+					for (int i = 0; i < auxCarga.length; i++) {
+						System.out.println("\nDados do veículo cadastrados pelo usuário " + (i + 1) + "\n" + veiculoDeCarga[i]);
+					}
 					break;
 				case 5:
 					System.out.println("Imprimir Veículo de Passeio pela Placa");
@@ -145,6 +156,5 @@ public class Main {
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "Encerrando o sistema *-* ", "Cancelar", JOptionPane.CLOSED_OPTION);
 		}
-
-	}
+	}	
 }
