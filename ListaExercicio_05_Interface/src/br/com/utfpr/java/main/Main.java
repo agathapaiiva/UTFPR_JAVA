@@ -50,6 +50,7 @@ public class Main {
 						System.out.println("Digite a placa do veículo de Passeio" + " [" + (i + 1) + "]");
 						placa = entradaDado.next();
 						veiculoDePasseio[i].setPlaca(placa);
+						
 
 						System.out.println("Digite a marca do veículo de Passeio" + " [" + (i + 1) + "]");
 						marca = entradaDado.next();
@@ -129,14 +130,18 @@ public class Main {
 					break;
 				case 3:
 					for (int i = 0; i < auxPasseio.length; i++) {
-						System.out.println("\nDados do veículo cadastrados pelo usuário " + (i + 1) + "\n" + veiculoDePasseio[i]);
+						System.out.println(
+								"\nDados do veículo cadastrados pelo usuário " + (i + 1) + "\n" + veiculoDePasseio[i]);
 					}
+					JOptionPane.showMessageDialog(null, "Todos os veiculos de passeio foram apresentados no console: ", "PASSEIO",
+							JOptionPane.WARNING_MESSAGE);
 					break;
 				case 4:
-					System.out.println("Imprimir Todos os Veículos de Carga");
 					for (int i = 0; i < auxCarga.length; i++) {
 						System.out.println("\nDados do veículo cadastrados pelo usuário " + (i + 1) + "\n" + veiculoDeCarga[i]);
 					}
+					JOptionPane.showMessageDialog(null, "Todos os veiculos de carga foram apresentados no console: ", "CARGA",
+							JOptionPane.WARNING_MESSAGE);
 					break;
 				case 5:
 					System.out.println("Imprimir Veículo de Passeio pela Placa");
@@ -154,7 +159,7 @@ public class Main {
 			entradaDado.close();
 
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, "Encerrando o sistema *-* ", "Cancelar", JOptionPane.CLOSED_OPTION);
+			JOptionPane.showMessageDialog(null, "Sistema Encerrado!", "Cancelar", JOptionPane.CLOSED_OPTION);
 		}
 	}	
 }
