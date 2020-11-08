@@ -34,7 +34,7 @@ public class Motor {
 		this.potencia = potencia;
 	}
 	
-	@Override
+	
 	public String toString() {
 		return "Quantidade de pistões do motor do veículo é: " + qtdPist + "\n" +
 			"Potência do motor do veículo é: " + potencia + "\n";

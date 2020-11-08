@@ -6,5 +6,5 @@ package br.com.utfpr.java.implement;
 
 public interface Calc {
 	
-	public void calcular();
+	public int calcular();
 }

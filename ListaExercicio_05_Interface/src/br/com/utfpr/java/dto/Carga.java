@@ -4,7 +4,9 @@
 
 package br.com.utfpr.java.dto;
 
-final public class Carga extends Veiculo{
+import br.com.utfpr.java.implement.Calc;
+
+public final class Carga extends Veiculo implements Calc{
 	private int tara;
 	private int cargaMax;
 	
@@ -52,4 +54,16 @@ final public class Carga extends Veiculo{
 		return result;
 	}
 
+	@Override
+	public int calcular() {
+		int somaNum = 0;
+		somaNum += getMotor().getQtdPist();
+		somaNum += getMotor().getPotencia();
+		somaNum += getQtdRodas();
+		somaNum += getVelocMax();
+		somaNum += getTara();
+		somaNum += getCargaMax();
+		return somaNum;
+	}
+	
 }

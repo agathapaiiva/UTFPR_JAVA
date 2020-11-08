@@ -4,9 +4,9 @@
 
 package br.com.utfpr.java.dto;
 
-import java.util.Formatter;
+import br.com.utfpr.java.implement.Calc;
 
-final public class Passeio extends Veiculo{
+public final class Passeio extends Veiculo implements Calc{
 	
 	private int qtdePassageiros;
 	
@@ -18,8 +18,6 @@ final public class Passeio extends Veiculo{
 		this.qtdePassageiros = qtdePassageiros;		
 	}
 	
-	Formatter formatter = new Formatter();
-	
 	/**
 	 * @return the qtdePassageiros
 	 */
@@ -30,7 +28,7 @@ final public class Passeio extends Veiculo{
 	/**
 	 * @param qtdePassageiros the qtdePassageiros to set
 	 */
-	final public void setQtdePassageiros(int qtdePassageiros) {
+	public void setQtdePassageiros(int qtdePassageiros) {
 		this.qtdePassageiros = qtdePassageiros;
 	}
 
@@ -40,4 +38,14 @@ final public class Passeio extends Veiculo{
 		return result;
 	}
 
+	@Override
+	public int calcular() {
+		int somaLetra = 0;
+		somaLetra += getPlaca().length();
+		somaLetra += getMarca().length();
+		somaLetra += getModelo().length();
+		somaLetra += getCor().length();
+		somaLetra += getQtdRodas();
+		return somaLetra;
+	}
 }

@@ -8,6 +8,8 @@ public abstract class Veiculo {
 	private String placa;
 	private String marca;
 	private String modelo;
+	private String cor;
+	private int qtdRodas;
 	private float velocMax;
 	private Motor motor;
 	
@@ -15,8 +17,26 @@ public abstract class Veiculo {
 		this.placa = " ";
 		this.marca = " ";
 		this.modelo = " ";
+		this.cor = " ";
+		this.qtdRodas = 0;
 		this.velocMax = 0;
 		this.motor = new Motor();
+	}
+	
+	public String getCor() {
+		return cor;
+	}
+
+	final public void setCor(String cor) {
+		this.cor = cor;
+	}
+
+	public int getQtdRodas() {
+		return qtdRodas;
+	}
+
+	final public void setQtdRodas(int qtdRodas) {
+		this.qtdRodas = qtdRodas;
 	}
 
 	public String getPlaca() {
@@ -64,8 +84,10 @@ public abstract class Veiculo {
 		return 	"Placa do veículo é: " + placa + "\n" +
 				"Marca do veículo é: " + marca + "\n" +
 				"Modelo do veículo é: " + modelo + "\n" +
+				"Cor do veículo é: " + cor + "\n"+
+				"Quantidade de Rodas: " + qtdRodas + "\n" +
 				"VelocMax do veículo é: " + velocMax + "\n" +
-				"Motor do veículo é: \n" + motor + "\n";
+				"Velocidade convertida é: " + calcVel(velocMax) + "\n";
 	}
 	
 	public abstract float calcVel(float velocMax);

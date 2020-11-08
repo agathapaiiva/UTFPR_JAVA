@@ -57,8 +57,4 @@ public class Aluno extends Pessoa implements VerifTurma{
 		}
 	}
 	
-	
-	
-	
-
 }
