@@ -215,7 +215,7 @@ public class Main {
 					System.out.println("================================================================\n");
 					System.out.println("Digite a placa do veículo CARGAS que deseja pesquisar.");
 					pesquisaPlacaCarga = entradaDado.next();
-					pesquisaPlacaPasseio(pesquisaPlacaCarga);
+					pesquisaPlacaCarga(pesquisaPlacaCarga);
 					System.out.println("================================================================");
 					break;
 				case 7:
