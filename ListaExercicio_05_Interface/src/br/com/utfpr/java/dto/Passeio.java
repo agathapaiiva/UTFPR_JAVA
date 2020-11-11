@@ -45,7 +45,6 @@ public final class Passeio extends Veiculo implements Calc{
 		somaLetra += getMarca().length();
 		somaLetra += getModelo().length();
 		somaLetra += getCor().length();
-		somaLetra += getQtdRodas();
 		return somaLetra;
 	}
 }

@@ -15,7 +15,9 @@ import br.com.utfpr.java.implement.Leitura;
 public class Main {
 	
 	public static Passeio[] veiculoDePasseio;
+	public static Passeio[] auxPasseio;
 	public static Carga[] veiculoDeCarga;
+	public static Carga[] auxCarga;
 	public static Leitura leitura;
 	public static Passeio veiculoPasseio;
 	public static Carga veiculoCarga;
@@ -34,13 +36,13 @@ public class Main {
 		int qtdePassageiros = 0;
 		int tara = 0;
 		int cargaMax = 0;
-		int numeroVeiculos= 1;
+		int numeroVeiculos= 5;
 		
 		veiculoDePasseio = new Passeio[numeroVeiculos];
 		veiculoDeCarga = new Carga[numeroVeiculos];
 		
-		Passeio[] auxPasseio = null;
-		Carga[] auxCarga = null;
+		auxPasseio = null;
+		auxCarga = null;
 		
 		veiculoPasseio = new Passeio();
 		veiculoCarga = new Carga();
@@ -68,7 +70,6 @@ public class Main {
 						placa = entradaDado.next();
 						veiculoDePasseio[i].setPlaca(placa);
 						
-
 						System.out.println("Digite a marca do veículo de Passeio:" + " [cadastro " + (i + 1) + "]");
 						marca = entradaDado.next();
 						veiculoDePasseio[i].setMarca(marca);
@@ -234,8 +235,8 @@ public class Main {
 	}
 	
 	public static int verificaVetorPasseio() {
-		for (int i = 0; i < veiculoDeCarga.length; i++) {
-			if(veiculoDeCarga[i] == null) {
+		for (int i = 0; i < veiculoDePasseio.length; i++) {
+			if(veiculoDePasseio[i] == null) {
 				return i;
 			}
 		}
@@ -252,31 +253,39 @@ public class Main {
 	}
 	
 	public static void pesquisaPlacaPasseio(String pesquisaPlacaPasseio) {
-		for (int i = 0; i < veiculoDePasseio.length; i++) {
-			if(veiculoDePasseio[i].getPlaca().equalsIgnoreCase(pesquisaPlacaPasseio)) {
-				System.out.println("Veículo encontrado pela placa digitada: \n" + veiculoDePasseio[i]);
-				System.out.println("MÉTODO CALCULAR: " + veiculoPasseio.calcular());
-			}else {
-				System.out.println("Nenhum veículo encontrado referente a placa digitada.");
-				System.out.println("MÉTODO CALCULAR: " + veiculoPasseio.calcular());
-				leitura.entDados();
+		int i = 0;
+		for (; i < veiculoDePasseio.length;) {
+			if (veiculoDePasseio[i] == null) {
+				System.out.println("Pesquisa encerrada!");
+				break;
 			}
-			
+			if (veiculoDePasseio[i].getPlaca().equalsIgnoreCase(pesquisaPlacaPasseio)) {
+				System.out.println("Veículo encontrado pela placa digitada: \n" + veiculoDePasseio[i]);
+				System.out.println("MÉTODO CALCULAR: " + auxPasseio[i].calcular());
+			} else {
+				System.out.println("Não foi encontrado nenhum veículo relacionado a placa informada!");
+			}
+			i++;
 		}
 	}
 	
 	public static void pesquisaPlacaCarga(String pesquisaPlacaCarga) {
-		for (int i = 0; i < veiculoDeCarga.length; i++) {
-			if(veiculoDeCarga[i].getPlaca().equalsIgnoreCase(pesquisaPlacaCarga)) {
-				System.out.println("Veículo encontrado pela placa digitada: \n" + veiculoDeCarga[i]);
-				System.out.println("MÉTODO CALCULAR: " + veiculoCarga.calcular());
-			}else {
-				System.out.println("Nenhum veículo encontrado referente a placa digitada.");
-				System.out.println("MÉTODO CALCULAR: " + veiculoCarga.calcular());
-				leitura.entDados();
+		int i = 0;
+		for (; i < veiculoDeCarga.length;) {
+			if (veiculoDeCarga[i] == null) {
+				System.out.println("Pesquisa encerrada!");
+				break;
 			}
-			
+			if (veiculoDeCarga[i].getPlaca().equalsIgnoreCase(pesquisaPlacaCarga)) {
+				System.out.println("Veículo encontrado pela placa digitada: \n" + veiculoDeCarga[i]);
+				System.out.println("MÉTODO CALCULAR: " + auxCarga[i].calcular());
+			}
+
+			if (!veiculoDeCarga[i].getPlaca().equals(pesquisaPlacaCarga)) {
+				System.out.println("Não foi encontrado nenhum veículo relacionado a placa informada!");
+			}
+			i++;
 		}
 	}
-	
+
 }
