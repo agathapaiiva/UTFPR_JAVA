@@ -71,12 +71,12 @@ public class Main {
 						try {
 							String aux;
 							aux = entradaDado.next();
-							verificaPlacaVeiculo(aux);
+							verificaPlacaVeiculoPasseio(aux);
 							
 						} catch (VeicExistException veiculoExistente) {
 							veiculoExistente.imprimeMensagemVeicExist();
+							break;
 						}
-					
 						
 						veiculoDePasseio[i].setPlaca(placa);
 						
@@ -137,7 +137,15 @@ public class Main {
 						veiculoDeCarga[i] = new Carga();
 
 						System.out.println("Digite a placa do veículo de Carga" + " [cadastro " + (i + 1) + "]");
-						placa = entradaDado.next();
+						try {
+							String aux;
+							aux = entradaDado.next();
+							verificaPlacaVeiculoCarga(aux);
+							
+						} catch (VeicExistException veiculoExistente) {
+							veiculoExistente.imprimeMensagemVeicExist();
+							break;
+						}
 						veiculoDeCarga[i].setPlaca(placa);
 
 						System.out.println("Digite a marca do veículo de Carga" + " [cadastro " + (i + 1) + "]");
@@ -305,10 +313,24 @@ public class Main {
 	}
 	
 	
-	public static void verificaPlacaVeiculo(String aux) throws VeicExistException {
+	public static void verificaPlacaVeiculoPasseio(String aux) throws VeicExistException {
 		for (int i = 0; i < veiculoDePasseio.length; i++) {
 			if(veiculoDePasseio[i] != null) {
 				if(aux.equalsIgnoreCase(veiculoDePasseio[i].getPlaca())) {
+						throw new VeicExistException();
+				}
+			}else{
+				placa = aux;
+
+			}
+		}
+
+	}
+	
+	public static void verificaPlacaVeiculoCarga(String aux) throws VeicExistException {
+		for (int i = 0; i < veiculoDeCarga.length; i++) {
+			if(veiculoDeCarga[i] != null) {
+				if(aux.equalsIgnoreCase(veiculoDeCarga[i].getPlaca())) {
 						throw new VeicExistException();
 				}
 			}else{
