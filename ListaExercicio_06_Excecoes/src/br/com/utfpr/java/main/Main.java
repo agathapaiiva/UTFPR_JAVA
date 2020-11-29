@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 import br.com.utfpr.java.dto.Carga;
 import br.com.utfpr.java.dto.Passeio;
 import br.com.utfpr.java.exceptions.VeicExistException;
+import br.com.utfpr.java.exceptions.VelocException;
 import br.com.utfpr.java.implement.Leitura;
 
 public class Main {
@@ -24,12 +25,12 @@ public class Main {
 	public static Carga veiculoCarga;
 	
 	static String  placa = "";
+	static float velocMax = 0;
 
 	public static void main(String[] args) {
 		String marca = "";
 		String modelo = "";
 		String cor = "";
-		float velocMax = 0;
 		int qtdRodas = 0;
 		int qtdPist = 0;
 		int potencia = 0;
@@ -101,9 +102,19 @@ public class Main {
 						veiculoDePasseio[i].setQtdePassageiros(qtdePassageiros);
 
 						System.out.println("Digite a velocidade do veículo em Km/h " + " [" + (i + 1) + "]");
-						velocMax = entradaDado.nextFloat();
-						System.out.println("Velocidade digita: " + velocMax + " Km/h " + "convertido: " + 
-								veiculoPasseio.calcVel(velocMax) + " m/h \n");
+						
+						
+						try {
+								velocMax = entradaDado.nextFloat();
+								verificaVelocidadePasseio(velocMax);
+							
+								
+						} catch (VelocException verificaVolocidade) {
+							verificaVolocidade.imprimeMensagemVelocidade();
+						}
+						velocMax = 100;
+						System.out.println("Velocidade digita: " + velocMax + " Km/h " + "convertido: "
+								+ veiculoPasseio.calcVel(velocMax) + " m/h \n");
 						veiculoDePasseio[i].setVelocMax(velocMax);
 
 						System.out.println("Digite a quantidade de pistão do motor de Passeio" + " [cadastro " + (i + 1) + "]");
@@ -165,7 +176,17 @@ public class Main {
 						veiculoDeCarga[i].setQtdRodas(qtdRodas);
 						
 						System.out.println("Digite a velocidade do veículo em Km/h " + " [cadastro " + (i + 1) + "]");
-						velocMax = entradaDado.nextFloat();
+					
+						
+						try {
+							velocMax = entradaDado.nextFloat();
+							verificaVelocidadeCarga(velocMax);
+							
+						} catch (VelocException verificaVolocidade) {
+							verificaVolocidade.imprimeMensagemVelocidade();
+						}
+						velocMax = 90;
+						
 						System.out.println("Velocidade digita: " + velocMax + " Km/h " + "convertido: " + 
 								veiculoCarga.calcVel(velocMax) + " m/h \n");
 						veiculoDeCarga[i].setVelocMax(velocMax);
@@ -276,43 +297,36 @@ public class Main {
 	}
 	
 	public static String pesquisaPlacaPasseio(String placa) {
-		int i = 0;
-		for (; i < veiculoDePasseio.length;) {
-			if (veiculoDePasseio[i] == null) {
-				System.out.println("Pesquisa encerrada!");
-				break;
+		for (int i = 0; i < veiculoDePasseio.length; i++) {
+			if(veiculoDePasseio[i] != null) {
+				if(veiculoDePasseio[i].getPlaca().equalsIgnoreCase(placa)){
+					System.out.println("Veículo encontrado pela placa digitada: \n" + veiculoDePasseio[i]);
+					System.out.println("MÉTODO CALCULAR: " + auxPasseio[i].calcular());
+				}else {
+					System.out.println("Não foi encontrado nenhum veículo relacionado a placa informada!");
+				}
 			}
-			if (veiculoDePasseio[i].getPlaca().equalsIgnoreCase(placa)) {
-				System.out.println("Veículo encontrado pela placa digitada: \n" + veiculoDePasseio[i]);
-				System.out.println("MÉTODO CALCULAR: " + auxPasseio[i].calcular());
-			} else {
-				System.out.println("Não foi encontrado nenhum veículo relacionado a placa informada!");
-			}
-			i++;
 		}
 		return placa;
-	}
-	
-	public static void pesquisaPlacaCarga(String placa) {
-		int i = 0;
-		for (; i < veiculoDeCarga.length;) {
-			if (veiculoDeCarga[i] == null) {
-				System.out.println("Pesquisa encerrada!");
-				break;
-			}
-			if (veiculoDeCarga[i].getPlaca().equalsIgnoreCase(placa)) {
-				System.out.println("Veículo encontrado pela placa digitada: \n" + veiculoDeCarga[i]);
-				System.out.println("MÉTODO CALCULAR: " + auxCarga[i].calcular());
-			}
+		
+	}	
 
-			if (!veiculoDeCarga[i].getPlaca().equals(placa)) {
-				System.out.println("Não foi encontrado nenhum veículo relacionado a placa informada!");
+	
+	public static String pesquisaPlacaCarga(String placa) {
+		for (int i = 0; i < veiculoDeCarga.length; i++) {
+			if(veiculoDeCarga[i] != null) {
+				if(veiculoDeCarga[i].getPlaca().equalsIgnoreCase(placa)){
+					System.out.println("Veículo encontrado pela placa digitada: \n" + veiculoDeCarga[i]);
+					System.out.println("MÉTODO CALCULAR: " + auxCarga[i].calcular());
+				}else {
+					System.out.println("Não foi encontrado nenhum veículo relacionado a placa informada!");
+				}
 			}
-			i++;
 		}
-	}
-	
-	
+		return placa;
+		
+	}	
+
 	public static void verificaPlacaVeiculoPasseio(String aux) throws VeicExistException {
 		for (int i = 0; i < veiculoDePasseio.length; i++) {
 			if(veiculoDePasseio[i] != null) {
@@ -339,5 +353,27 @@ public class Main {
 			}
 		}
 
+	}
+	
+	public static float verificaVelocidadePasseio(float velocMax) throws VelocException{
+		for (int i = 0; i < veiculoDePasseio.length; i++) {
+			if(veiculoDePasseio[i] != null) {
+				if(velocMax < 80 || velocMax > 110) {
+					throw new VelocException();
+				}
+			}
+		}
+		return velocMax;
+	}
+	
+	public static float verificaVelocidadeCarga(float velocMax) throws VelocException{
+		for (int i = 0; i < veiculoDeCarga.length; i++) {
+			if(veiculoDeCarga[i] != null) {
+				if(velocMax < 80 || velocMax > 110) {
+					throw new VelocException();
+				}
+			}
+		}
+		return velocMax;
 	}
 }
