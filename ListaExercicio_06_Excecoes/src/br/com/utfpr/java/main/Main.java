@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 
 import br.com.utfpr.java.dto.Carga;
 import br.com.utfpr.java.dto.Passeio;
+import br.com.utfpr.java.exceptions.VeicExistException;
 import br.com.utfpr.java.implement.Leitura;
 
 public class Main {
@@ -21,11 +22,10 @@ public class Main {
 	public static Leitura leitura;
 	public static Passeio veiculoPasseio;
 	public static Carga veiculoCarga;
-	public static String pesquisaPlacaPasseio = "";
-	public static String pesquisaPlacaCarga = "";
+	
+	static String  placa = "";
 
 	public static void main(String[] args) {
-		String placa = "";
 		String marca = "";
 		String modelo = "";
 		String cor = "";
@@ -67,7 +67,17 @@ public class Main {
 						veiculoDePasseio[i] = new Passeio();
 						
 						System.out.println("Digite a placa do veículo de Passeio:" + " [cadastro " + (i + 1) + "]");
-						placa = entradaDado.next();
+						
+						try {
+							String aux;
+							aux = entradaDado.next();
+							verificaPlacaVeiculo(aux);
+							
+						} catch (VeicExistException veiculoExistente) {
+							veiculoExistente.imprimeMensagemVeicExist();
+						}
+					
+						
 						veiculoDePasseio[i].setPlaca(placa);
 						
 						System.out.println("Digite a marca do veículo de Passeio:" + " [cadastro " + (i + 1) + "]");
@@ -211,8 +221,8 @@ public class Main {
 					System.out.println("  		         PESQUISA DE VEÍCULO PASSEIO");
 					System.out.println("================================================================\n");
 					System.out.println("Digite a placa do veículo PASSEIO que deseja pesquisar.");
-					pesquisaPlacaPasseio = entradaDado.next();
-					pesquisaPlacaPasseio(pesquisaPlacaPasseio);
+					placa = entradaDado.next();
+					pesquisaPlacaPasseio(placa);
 					System.out.println("================================================================");
 					break;
 				case 6: 
@@ -220,8 +230,8 @@ public class Main {
 					System.out.println("  		         PESQUISA DE VEÍCULO CARGA");
 					System.out.println("================================================================\n");
 					System.out.println("Digite a placa do veículo CARGAS que deseja pesquisar.");
-					pesquisaPlacaCarga = entradaDado.next();
-					pesquisaPlacaCarga(pesquisaPlacaCarga);
+					placa = entradaDado.next();
+					pesquisaPlacaCarga(placa);
 					System.out.println("================================================================");
 					break;
 				case 7:
@@ -257,14 +267,14 @@ public class Main {
 		return -1;
 	}
 	
-	public static void pesquisaPlacaPasseio(String pesquisaPlacaPasseio) {
+	public static String pesquisaPlacaPasseio(String placa) {
 		int i = 0;
 		for (; i < veiculoDePasseio.length;) {
 			if (veiculoDePasseio[i] == null) {
 				System.out.println("Pesquisa encerrada!");
 				break;
 			}
-			if (veiculoDePasseio[i].getPlaca().equalsIgnoreCase(pesquisaPlacaPasseio)) {
+			if (veiculoDePasseio[i].getPlaca().equalsIgnoreCase(placa)) {
 				System.out.println("Veículo encontrado pela placa digitada: \n" + veiculoDePasseio[i]);
 				System.out.println("MÉTODO CALCULAR: " + auxPasseio[i].calcular());
 			} else {
@@ -272,24 +282,40 @@ public class Main {
 			}
 			i++;
 		}
+		return placa;
 	}
 	
-	public static void pesquisaPlacaCarga(String pesquisaPlacaCarga) {
+	public static void pesquisaPlacaCarga(String placa) {
 		int i = 0;
 		for (; i < veiculoDeCarga.length;) {
 			if (veiculoDeCarga[i] == null) {
 				System.out.println("Pesquisa encerrada!");
 				break;
 			}
-			if (veiculoDeCarga[i].getPlaca().equalsIgnoreCase(pesquisaPlacaCarga)) {
+			if (veiculoDeCarga[i].getPlaca().equalsIgnoreCase(placa)) {
 				System.out.println("Veículo encontrado pela placa digitada: \n" + veiculoDeCarga[i]);
 				System.out.println("MÉTODO CALCULAR: " + auxCarga[i].calcular());
 			}
 
-			if (!veiculoDeCarga[i].getPlaca().equals(pesquisaPlacaCarga)) {
+			if (!veiculoDeCarga[i].getPlaca().equals(placa)) {
 				System.out.println("Não foi encontrado nenhum veículo relacionado a placa informada!");
 			}
 			i++;
 		}
+	}
+	
+	
+	public static void verificaPlacaVeiculo(String aux) throws VeicExistException {
+		for (int i = 0; i < veiculoDePasseio.length; i++) {
+			if(veiculoDePasseio[i] != null) {
+				if(aux.equalsIgnoreCase(veiculoDePasseio[i].getPlaca())) {
+						throw new VeicExistException();
+				}
+			}else{
+				placa = aux;
+
+			}
+		}
+
 	}
 }
