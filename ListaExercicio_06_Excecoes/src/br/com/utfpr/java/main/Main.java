@@ -12,43 +12,14 @@ import br.com.utfpr.java.dto.Carga;
 import br.com.utfpr.java.dto.Passeio;
 import br.com.utfpr.java.exceptions.VeicExistException;
 import br.com.utfpr.java.exceptions.VelocException;
+import br.com.utfpr.java.implement.BDVeiculos;
 import br.com.utfpr.java.implement.Leitura;
 
 public class Main {
-	
-	public static Passeio[] veiculoDePasseio;
-	public static Passeio[] auxPasseio;
-	public static Carga[] veiculoDeCarga;
-	public static Carga[] auxCarga;
-	public static Leitura leitura;
-	public static Passeio veiculoPasseio;
-	public static Carga veiculoCarga;
-	
-	static String  placa = "";
-	static float velocMax = 0;
 
 	public static void main(String[] args) {
-		String marca = "";
-		String modelo = "";
-		String cor = "";
-		int qtdRodas = 0;
-		int qtdPist = 0;
-		int potencia = 0;
-		int qtdePassageiros = 0;
-		int tara = 0;
-		int cargaMax = 0;
-		int numeroVeiculos= 5;
-		
-		veiculoDePasseio = new Passeio[numeroVeiculos];
-		veiculoDeCarga = new Carga[numeroVeiculos];
-		
-		auxPasseio = null;
-		auxCarga = null;
-		
-		veiculoPasseio = new Passeio();
-		veiculoCarga = new Carga();
-		leitura = new Leitura();
-		
+		BDVeiculos auxBD = new BDVeiculos();
+		Leitura leitura = new Leitura();
 		Scanner entradaDado = new Scanner(System.in);
 
 		try {
@@ -59,78 +30,75 @@ public class Main {
 
 				switch (op) {
 				case 1:
-					for (int i = verificaVetorPasseio(); i < numeroVeiculos; i++) {
+					for (int i = auxBD.verificaVetorPasseio(); i < auxBD.numeroVeiculos; i++) {
 						if(i == -1) {
 							JOptionPane.showMessageDialog(null, "Vetor de Passeio cheio!", "WARNING", JOptionPane.WARNING_MESSAGE);
 							leitura.entDados();
 							
 						}
-						veiculoDePasseio[i] = new Passeio();
+						auxBD.veiculoDePasseio[i] = new Passeio();
 						
 						System.out.println("Digite a placa do veículo de Passeio:" + " [cadastro " + (i + 1) + "]");
 						
 						try {
 							String aux;
 							aux = entradaDado.next();
-							verificaPlacaVeiculoPasseio(aux);
+							auxBD.verificaPlacaVeiculoPasseio(aux);
 							
 						} catch (VeicExistException veiculoExistente) {
 							veiculoExistente.imprimeMensagemVeicExist();
 							break;
 						}
 						
-						veiculoDePasseio[i].setPlaca(placa);
+						auxBD.veiculoDePasseio[i].setPlaca(auxBD.placa);
 						
 						System.out.println("Digite a marca do veículo de Passeio:" + " [cadastro " + (i + 1) + "]");
-						marca = entradaDado.next();
-						veiculoDePasseio[i].setMarca(marca);
+						auxBD.marca = entradaDado.next();
+						auxBD.veiculoDePasseio[i].setMarca(auxBD.marca);
 
 						System.out.println("Digite a modelo do veículo de Passeio:" + " [cadastro " + (i + 1) + "]");
-						modelo = entradaDado.next();
-						veiculoDePasseio[i].setModelo(modelo);
+						auxBD.modelo = entradaDado.next();
+						auxBD.veiculoDePasseio[i].setModelo(auxBD.modelo);
 						
 						System.out.println("Digite a cor do veículo de Passeio:" + " [cadastro " + (i + 1) + "]");
-						cor = entradaDado.next();
-						veiculoDePasseio[i].setCor(cor);
+						auxBD.cor = entradaDado.next();
+						auxBD.veiculoDePasseio[i].setCor(auxBD.cor);
 						
 						System.out.println("Digite a quantidade de rodas do veículo de Passeio:" + " [cadastro " + (i + 1) + "]");
-						qtdRodas = entradaDado.nextInt();
-						veiculoDePasseio[i].setQtdRodas(qtdRodas);
+						auxBD.qtdRodas = entradaDado.nextInt();
+						auxBD.veiculoDePasseio[i].setQtdRodas(auxBD.qtdRodas);
 						
 						System.out.println("Digite a quantidade de passageiros do veículo de Passeio" + " [cadastro " + (i + 1) + "]");
-						qtdePassageiros = entradaDado.nextInt();
-						veiculoDePasseio[i].setQtdePassageiros(qtdePassageiros);
+						auxBD.qtdePassageiros = entradaDado.nextInt();
+						auxBD.veiculoDePasseio[i].setQtdePassageiros(auxBD.qtdePassageiros);
 
 						System.out.println("Digite a velocidade do veículo em Km/h " + " [" + (i + 1) + "]");
 						
-						
 						try {
-								velocMax = entradaDado.nextFloat();
-								verificaVelocidadePasseio(velocMax);
+							auxBD.velocMax = entradaDado.nextFloat();
+							auxBD.veiculoDePasseio[i].setVelocMax(auxBD.velocMax);
 							
-								
 						} catch (VelocException verificaVolocidade) {
 							verificaVolocidade.imprimeMensagemVelocidade();
+							auxBD.velocMax = 100;
+							System.out.println("Assumindo a Velocidade : " + auxBD.velocMax + " Km/h " + "convertido: " + auxBD.veiculoDePasseio[i].calcVel(auxBD.velocMax) + " cm/h \n");
 						}
-						velocMax = 100;
-						System.out.println("Velocidade digita: " + velocMax + " Km/h " + "convertido: "
-								+ veiculoPasseio.calcVel(velocMax) + " m/h \n");
-						veiculoDePasseio[i].setVelocMax(velocMax);
+						auxBD.veiculoDePasseio[i].setVelocMax(auxBD.velocMax);
 
 						System.out.println("Digite a quantidade de pistão do motor de Passeio" + " [cadastro " + (i + 1) + "]");
-						qtdPist = entradaDado.nextInt();
-						veiculoDePasseio[i].getMotor().setQtdPist(qtdPist);
+						auxBD.qtdPist = entradaDado.nextInt();
+						auxBD.veiculoDePasseio[i].getMotor().setQtdPist(auxBD.qtdPist);
 
 						System.out.println("Digite a potência do motor de Passeio" + " [cadastro " + (i + 1) + "]");
-						potencia = entradaDado.nextInt();
-						veiculoDePasseio[i].getMotor().setPotencia(potencia);
+						auxBD.potencia = entradaDado.nextInt();
+						auxBD.veiculoDePasseio[i].getMotor().setPotencia(auxBD.potencia);
 						System.out.println("================================================================\n");
 						
-						auxPasseio = veiculoDePasseio.clone();
+						auxBD.auxPasseio = auxBD.veiculoDePasseio.clone();
 						
 						if (JOptionPane.showConfirmDialog(null, "Deseja cadastrar outro veículo? ", "Windows Passeio",
 						        JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-							verificaVetorPasseio();
+							auxBD.verificaVetorPasseio();
 							
 							if(i == -1) {
 								JOptionPane.showMessageDialog(null, "Vetor de Passeio cheio!", "WARNING", JOptionPane.WARNING_MESSAGE);
@@ -143,73 +111,71 @@ public class Main {
 					}
 					break;
 				case 2:
-					for (int i = verificaVetorCarga(); i < numeroVeiculos; i++) {
+					for (int i = auxBD.verificaVetorCarga(); i < auxBD.numeroVeiculos; i++) {
 					
-						veiculoDeCarga[i] = new Carga();
+						auxBD.veiculoDeCarga[i] = new Carga();
 
 						System.out.println("Digite a placa do veículo de Carga" + " [cadastro " + (i + 1) + "]");
 						try {
 							String aux;
 							aux = entradaDado.next();
-							verificaPlacaVeiculoCarga(aux);
+							auxBD.verificaPlacaVeiculoCarga(aux);
 							
 						} catch (VeicExistException veiculoExistente) {
 							veiculoExistente.imprimeMensagemVeicExist();
 							break;
 						}
-						veiculoDeCarga[i].setPlaca(placa);
+						auxBD.veiculoDeCarga[i].setPlaca(auxBD.placa);
 
 						System.out.println("Digite a marca do veículo de Carga" + " [cadastro " + (i + 1) + "]");
-						marca = entradaDado.next();
-						veiculoDeCarga[i].setMarca(marca);
+						auxBD.marca = entradaDado.next();
+						auxBD.veiculoDeCarga[i].setMarca(auxBD.marca);
 
 						System.out.println("Digite a modelo do veículo de Carga" + " [cadastro " + (i + 1) + "]");
-						modelo = entradaDado.next();
-						veiculoDeCarga[i].setModelo(modelo);
+						auxBD.modelo = entradaDado.next();
+						auxBD.veiculoDeCarga[i].setModelo(auxBD.modelo);
 						
 						System.out.println("Digite a cor do veículo de Carga:" + " [cadastro " + (i + 1) + "]");
-						cor = entradaDado.next();
-						veiculoDeCarga[i].setCor(cor);
+						auxBD.cor = entradaDado.next();
+						auxBD.veiculoDeCarga[i].setCor(auxBD.cor);
 						
 						System.out.println("Digite a quantidade de rodas do veículo de Carga:" + " [cadastro " + (i + 1) + "]");
-						qtdRodas = entradaDado.nextInt();
-						veiculoDeCarga[i].setQtdRodas(qtdRodas);
+						auxBD.qtdRodas = entradaDado.nextInt();
+						auxBD.veiculoDeCarga[i].setQtdRodas(auxBD.qtdRodas);
 						
 						System.out.println("Digite a velocidade do veículo em Km/h " + " [cadastro " + (i + 1) + "]");
 					
 						
 						try {
-							velocMax = entradaDado.nextFloat();
-							verificaVelocidadeCarga(velocMax);
+							auxBD.velocMax = entradaDado.nextFloat();
+							auxBD.veiculoDeCarga[i].setVelocMax(auxBD.velocMax);
 							
 						} catch (VelocException verificaVolocidade) {
 							verificaVolocidade.imprimeMensagemVelocidade();
+							auxBD.velocMax = 90;
+							System.out.println("Assumindo a Velocidade : " + auxBD.velocMax + " Km/h " + "convertido: " + auxBD.veiculoDeCarga[i].calcVel(auxBD.velocMax) + " m/h \n");
 						}
-						velocMax = 90;
+						auxBD.veiculoDeCarga[i].setVelocMax(auxBD.velocMax);
 						
-						System.out.println("Velocidade digita: " + velocMax + " Km/h " + "convertido: " + 
-								veiculoCarga.calcVel(velocMax) + " m/h \n");
-						veiculoDeCarga[i].setVelocMax(velocMax);
-
 						System.out.println("Digite a quantidade de pistão do motor de Carga" + " [cadastro " + (i + 1) + "]");
-						qtdPist = entradaDado.nextInt();
-						veiculoDeCarga[i].getMotor().setQtdPist(qtdPist);
+						auxBD.qtdPist = entradaDado.nextInt();
+						auxBD.veiculoDeCarga[i].getMotor().setQtdPist(auxBD.qtdPist);
 
 						System.out.println("Digite a potência do motor de Carga" + " [cadastro " + (i + 1) + "]");
-						potencia = entradaDado.nextInt();
-						veiculoDeCarga[i].getMotor().setPotencia(potencia);
+						auxBD.potencia = entradaDado.nextInt();
+						auxBD.veiculoDeCarga[i].getMotor().setPotencia(auxBD.potencia);
 						
 						System.out.println("Digite a Tara do veículo de Carga" + " [cadastro " + (i + 1) + "]");
-						tara = entradaDado.nextInt();
-						veiculoDeCarga[i].setTara(tara);
+						auxBD.tara = entradaDado.nextInt();
+						auxBD.veiculoDeCarga[i].setTara(auxBD.tara);
 						
 						System.out.println("Digite a carga máxima do veículo: " + " [cadastro " + (i + 1) + "]");
-						cargaMax = entradaDado.nextInt();
-						veiculoDeCarga[i].setCargaMax(cargaMax);
+						auxBD.cargaMax = entradaDado.nextInt();
+						auxBD.veiculoDeCarga[i].setCargaMax(auxBD.cargaMax);
 						
 						System.out.println("================================================================\n");
 						
-						auxCarga = veiculoDeCarga.clone();
+						auxBD.auxCarga = auxBD.veiculoDeCarga.clone();
 					
 						if (JOptionPane.showConfirmDialog(null, "Deseja cadastrar outro veículo? ", "Windows Carga",
 						        JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
@@ -219,12 +185,12 @@ public class Main {
 					}
 					break;
 				case 3:
-					for (int i = 0; i < auxPasseio.length; i++) {
-						if(auxPasseio[i] != null) {
+					for (int i = 0; i < auxBD.auxPasseio.length; i++) {
+						if(auxBD.auxPasseio[i] != null) {
 							System.out.println("================================================================");
 							System.out.println("  		      TODOS OS VEÍCULOS DE PASSEIO");
 							System.out.println("================================================================\n");
-							System.out.println("\nDados do veículo de PASSEIO cadastrados pelo usuário " + (i + 1) + "\n" + veiculoDePasseio[i]);
+							System.out.println("\nDados do veículo de PASSEIO cadastrados pelo usuário " + (i + 1) + "\n" + auxBD.veiculoDePasseio[i]);
 							System.out.println("================================================================");
 						}
 						
@@ -233,12 +199,12 @@ public class Main {
 							JOptionPane.WARNING_MESSAGE);
 					break;
 				case 4:
-					for (int i = 0; i < auxCarga.length; i++) {
-						if(auxCarga[i] != null) {
+					for (int i = 0; i < auxBD.auxCarga.length; i++) {
+						if(auxBD.auxCarga[i] != null) {
 							System.out.println("================================================================");
 							System.out.println("  		      TODOS OS VEÍCULOS DE CARGA");
 							System.out.println("================================================================\n");
-							System.out.println("\nDados do veículo de CARGAS cadastrados pelo usuário " + (i + 1) + "\n" + veiculoDeCarga[i]);
+							System.out.println("\nDados do veículo de CARGAS cadastrados pelo usuário " + (i + 1) + "\n" + auxBD.veiculoDeCarga[i]);
 							System.out.println("================================================================");
 						}
 					}
@@ -250,8 +216,8 @@ public class Main {
 					System.out.println("  		         PESQUISA DE VEÍCULO PASSEIO");
 					System.out.println("================================================================\n");
 					System.out.println("Digite a placa do veículo PASSEIO que deseja pesquisar.");
-					placa = entradaDado.next();
-					pesquisaPlacaPasseio(placa);
+					auxBD.placa = entradaDado.next();
+					auxBD.pesquisaPlacaPasseio(auxBD.placa);
 					System.out.println("================================================================");
 					break;
 				case 6: 
@@ -259,8 +225,8 @@ public class Main {
 					System.out.println("  		         PESQUISA DE VEÍCULO CARGA");
 					System.out.println("================================================================\n");
 					System.out.println("Digite a placa do veículo CARGAS que deseja pesquisar.");
-					placa = entradaDado.next();
-					pesquisaPlacaCarga(placa);
+					auxBD.placa = entradaDado.next();
+					auxBD.pesquisaPlacaCarga(auxBD.placa);
 					System.out.println("================================================================");
 					break;
 				case 7:
@@ -278,102 +244,4 @@ public class Main {
 		
 	}
 	
-	public static int verificaVetorPasseio() {
-		for (int i = 0; i < veiculoDePasseio.length; i++) {
-			if(veiculoDePasseio[i] == null) {
-				return i;
-			}
-		}
-		return -1;
-	}
-	
-	public static int verificaVetorCarga() {
-		for (int i = 0; i < veiculoDeCarga.length; i++) {
-			if(veiculoDeCarga[i] == null) {
-				return i;
-			}
-		}
-		return -1;
-	}
-	
-	public static String pesquisaPlacaPasseio(String placa) {
-		for (int i = 0; i < veiculoDePasseio.length; i++) {
-			if(veiculoDePasseio[i] != null) {
-				if(veiculoDePasseio[i].getPlaca().equalsIgnoreCase(placa)){
-					System.out.println("Veículo encontrado pela placa digitada: \n" + veiculoDePasseio[i]);
-					System.out.println("MÉTODO CALCULAR: " + auxPasseio[i].calcular());
-				}else {
-					System.out.println("Não foi encontrado nenhum veículo relacionado a placa informada!");
-				}
-			}
-		}
-		return placa;
-		
-	}	
-
-	
-	public static String pesquisaPlacaCarga(String placa) {
-		for (int i = 0; i < veiculoDeCarga.length; i++) {
-			if(veiculoDeCarga[i] != null) {
-				if(veiculoDeCarga[i].getPlaca().equalsIgnoreCase(placa)){
-					System.out.println("Veículo encontrado pela placa digitada: \n" + veiculoDeCarga[i]);
-					System.out.println("MÉTODO CALCULAR: " + auxCarga[i].calcular());
-				}else {
-					System.out.println("Não foi encontrado nenhum veículo relacionado a placa informada!");
-				}
-			}
-		}
-		return placa;
-		
-	}	
-
-	public static void verificaPlacaVeiculoPasseio(String aux) throws VeicExistException {
-		for (int i = 0; i < veiculoDePasseio.length; i++) {
-			if(veiculoDePasseio[i] != null) {
-				if(aux.equalsIgnoreCase(veiculoDePasseio[i].getPlaca())) {
-						throw new VeicExistException();
-				}
-			}else{
-				placa = aux;
-
-			}
-		}
-
-	}
-	
-	public static void verificaPlacaVeiculoCarga(String aux) throws VeicExistException {
-		for (int i = 0; i < veiculoDeCarga.length; i++) {
-			if(veiculoDeCarga[i] != null) {
-				if(aux.equalsIgnoreCase(veiculoDeCarga[i].getPlaca())) {
-						throw new VeicExistException();
-				}
-			}else{
-				placa = aux;
-
-			}
-		}
-
-	}
-	
-	public static float verificaVelocidadePasseio(float velocMax) throws VelocException{
-		for (int i = 0; i < veiculoDePasseio.length; i++) {
-			if(veiculoDePasseio[i] != null) {
-				if(velocMax < 80 || velocMax > 110) {
-					throw new VelocException();
-				}
-			}
-		}
-		return velocMax;
-	}
-	
-	public static float verificaVelocidadeCarga(float velocMax) throws VelocException{
-		for (int i = 0; i < veiculoDeCarga.length; i++) {
-			if(veiculoDeCarga[i] != null) {
-				if(velocMax < 80 || velocMax > 110) {
-					throw new VelocException();
-				}
-			}
-		}
-		return velocMax;
-	}
 }

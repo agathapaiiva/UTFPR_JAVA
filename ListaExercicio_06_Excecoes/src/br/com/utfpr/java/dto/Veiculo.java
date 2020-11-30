@@ -4,6 +4,8 @@
 
 package br.com.utfpr.java.dto;
 
+import br.com.utfpr.java.exceptions.VelocException;
+
 public abstract class Veiculo {
 	private String placa;
 	private String marca;
@@ -67,8 +69,16 @@ public abstract class Veiculo {
 		return velocMax;
 	}
 
-	final public void setVelocMax(float velocMax) {
-		this.velocMax = velocMax;
+	public void setVelocMax(float velocMax) throws VelocException {
+
+		float velocMinima = 80;
+		float velocMaxima = 110;
+		
+		if(velocMax >= velocMinima && velocMax <= velocMaxima) {
+			this.velocMax = velocMax;
+		} else {
+			throw new VelocException();
+		}
 	}
 
 	public Motor getMotor() {
