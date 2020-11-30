@@ -1,3 +1,7 @@
+/**
+ * @author agatha-paiva
+ */
+
 package br.com.utfpr.java.implement;
 
 import br.com.utfpr.java.dto.Carga;
