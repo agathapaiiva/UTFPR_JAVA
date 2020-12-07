@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import javax.swing.JOptionPane;
+
 import br.com.utfpr.java.dto.Carga;
 import br.com.utfpr.java.dto.Passeio;
 import br.com.utfpr.java.exceptions.VeicExistException;
@@ -112,6 +114,12 @@ public class BDVeiculos {
 			System.out.println("================================================================\n");
 			
 			veiculoDePasseio.add(veiculoPasseio);
+			
+			if (JOptionPane.showConfirmDialog(null, "Deseja cadastrar outro veículo? ", "Windows Passeio",
+			        JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+				verificaVetorPasseio();
+				cadastrarVeiculoPasseio();
+			}
 		}
 	
 
@@ -124,7 +132,7 @@ public class BDVeiculos {
 		return -1;
 	}
 
-	public static String pesquisaPlacaPasseio(String placa) {
+	public static void pesquisaPlacaPasseio(String placa) {
 		for (int i = 0; i < veiculoDePasseio.size(); i++) {
 			if(veiculoDePasseio.get(i) != null) {
 				if(veiculoDePasseio.get(i).getPlaca().equalsIgnoreCase(placa)){
@@ -134,7 +142,6 @@ public class BDVeiculos {
 				}
 			}
 		}
-		return placa;
 	}	
 	
 	public static void verificaPlacaVeiculoPasseio(String aux) throws VeicExistException {
@@ -237,6 +244,15 @@ public class BDVeiculos {
 		veiculoCarga.setCargaMax(cargaMax);
 		
 		System.out.println("================================================================\n");
+		
+		veiculoDeCarga.add(veiculoCarga);
+		
+		
+		if (JOptionPane.showConfirmDialog(null, "Deseja cadastrar outro veículo? ", "Windows Passeio",
+		        JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+			verificaVetorCarga();
+			cadastrarVeiculoCarga();
+		}
 	}
 
 	public static int verificaVetorCarga() {
@@ -248,7 +264,7 @@ public class BDVeiculos {
 		return -1;
 	}
 	
-	public static String pesquisaPlacaCarga(String placa) {
+	public static void pesquisaPlacaCarga(String placa) {
 		for (int i = 0; i < veiculoDeCarga.size(); i++) {
 			if(veiculoDeCarga.get(i)!= null) {
 				if(veiculoDeCarga.get(i).getPlaca().equalsIgnoreCase(placa)){
@@ -258,7 +274,6 @@ public class BDVeiculos {
 				}
 			}
 		}
-		return placa;
 	}	
 	
 	public static void verificaPlacaVeiculoCarga(String aux) throws VeicExistException {

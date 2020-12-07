@@ -32,32 +32,19 @@ public class Main {
 					System.out.println("  		      CADASTRANDO UM VEÍCULO DE PASSEIO");
 					System.out.println("================================================================\n");
 					bdveiculos.cadastrarVeiculoPasseio();
-					
-					if (JOptionPane.showConfirmDialog(null, "Deseja cadastrar outro veículo? ", "Windows Passeio",
-					        JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-						bdveiculos.verificaVetorPasseio();
-						bdveiculos.cadastrarVeiculoPasseio();
-					}
-					
 					break;
 				case 2:
 					System.out.println("================================================================");
 					System.out.println("  		      CADASTRANDO UM VEÍCULO DE CARGA");
 					System.out.println("================================================================\n");
-					
-					if (JOptionPane.showConfirmDialog(null, "Deseja cadastrar outro veículo? ", "Windows Passeio",
-					        JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-						bdveiculos.verificaVetorCarga();
-						bdveiculos.cadastrarVeiculoCarga();
-					}
-					
+					bdveiculos.cadastrarVeiculoCarga();
 					break;
 				case 3:
+					System.out.println("================================================================");
+					System.out.println("  		      TODOS OS VEÍCULOS DE PASSEIO");
+					System.out.println("================================================================\n");
 					for (int i = 0; i < bdveiculos.getVeiculoDePasseio().size(); i++) {
 						if(bdveiculos.getVeiculoDePasseio().get(i) != null) {
-							System.out.println("================================================================");
-							System.out.println("  		      TODOS OS VEÍCULOS DE PASSEIO");
-							System.out.println("================================================================\n");
 							System.out.println("\nDados do veículo de PASSEIO cadastrados pelo usuário " + "\n" + bdveiculos.getVeiculoDePasseio().get(i));
 							System.out.println("================================================================");
 						}
@@ -67,11 +54,11 @@ public class Main {
 							JOptionPane.WARNING_MESSAGE);
 					break;
 				case 4:
+					System.out.println("================================================================");
+					System.out.println("  		      TODOS OS VEÍCULOS DE CARGA");
+					System.out.println("================================================================\n");
 					for (int i = 0; i < bdveiculos.getVeiculoDeCarga().size(); i++) {
 						if(bdveiculos.getVeiculoDeCarga().get(i) != null) {
-							System.out.println("================================================================");
-							System.out.println("  		      TODOS OS VEÍCULOS DE CARGA");
-							System.out.println("================================================================\n");
 							System.out.println("\nDados do veículo de CARGAS cadastrados pelo usuário " + "\n" + bdveiculos.getVeiculoDeCarga().get(i));
 							System.out.println("================================================================");
 						}
