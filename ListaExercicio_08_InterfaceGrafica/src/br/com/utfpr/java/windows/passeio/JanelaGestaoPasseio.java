@@ -93,7 +93,7 @@ JanelaGestaoDeVeiculo gestaoVeiculo = new JanelaGestaoDeVeiculo();
 		
 		if(evt.getSource().equals(buttonImprimirExcluirPasseio)) {
 			JanelaImprimirTodosVeiculoDePasseio imprimirExcluirTodos = new JanelaImprimirTodosVeiculoDePasseio();
-			imprimirExcluirTodos.criarJanelaImprimirExcluirPasseio();
+			imprimirExcluirTodos.configurarJanela();
 		}
 		
 		if(evt.getSource().equals(buttonSair)) {

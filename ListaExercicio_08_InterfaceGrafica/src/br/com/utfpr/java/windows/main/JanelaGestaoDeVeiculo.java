@@ -51,11 +51,6 @@ public class JanelaGestaoDeVeiculo implements ActionListener{
 		janelaGestaoVeiculo.add(buttonPasseio); 
 		
 	}
-	
-	public static void main(String[] args) {
-		JanelaGestaoDeVeiculo janelaTest = new JanelaGestaoDeVeiculo();
-		janelaTest.criarJanelaGestao();
-	}
 
 	@Override
 	public void actionPerformed(ActionEvent evt) {

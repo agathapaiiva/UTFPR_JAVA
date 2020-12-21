@@ -52,6 +52,7 @@ public class JanelaGestaoCarga implements ActionListener{
 		labelImprimirExcluir.setText("IMPRIMIR / EXCLUIR TODOS");
 		labelImprimirExcluir.setBounds(80, 130, 300, 38);
 		buttonImprimirExcluirCarga.addActionListener(this);
+		buttonImprimirExcluirCarga.setEnabled(false);
 		
 		buttonSair.setBorder(new LineBorder(Color.BLACK));
 		buttonSair.setBounds(30, 180, 38, 38);
