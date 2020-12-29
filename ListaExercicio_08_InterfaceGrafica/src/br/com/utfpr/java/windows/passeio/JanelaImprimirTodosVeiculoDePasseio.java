@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.WindowConstants;
@@ -30,10 +31,11 @@ public class JanelaImprimirTodosVeiculoDePasseio extends JFrame implements Actio
 	private JFrame janelaImprimirTodosVeiculoDePasseio = new JFrame();
 	
 	PasseioTableModel passeioTableModel = new PasseioTableModel();
+	BDVeiculos bdVeiculos = new BDVeiculos();
 	JTable table;
 	JScrollPane scrollPane = new JScrollPane(table);
 	
-	String[] colunas = {"Plca", "Marca", "Modelo", "Cor", "Qtd.Rodas", "Veloc Máx", "Qtd.Pist", "Potência", "Qtd.Passageiros"};
+	String[] colunas = {"Placa", "Marca", "Modelo", "Cor", "Qtd.Rodas", "Veloc Máx", "Qtd.Pist", "Potência", "Qtd.Passageiros"};
 	
 	public JanelaImprimirTodosVeiculoDePasseio() {
 		configurarJanela();	
@@ -89,12 +91,20 @@ public class JanelaImprimirTodosVeiculoDePasseio extends JFrame implements Actio
 	        add(table, BorderLayout.BEFORE_LINE_BEGINS);
 	        
 		}
-		if(evt.getSource().equals(buttonImprimirTudo)) {
-			
-		}
+		
 		if(evt.getSource().equals(buttonSair)) {
 			dispose();
 		}
+		
+		if (evt.getSource().equals(buttonExcluirTudo)) {
+
+			if (bdVeiculos.getVeiculoDePasseio().size() > 0) {
+				passeioTableModel.removeTable();
+				JOptionPane.showMessageDialog(null, "Veículos excluídos com sucesso!");
+			}
+
+		}
 	}
+	
 }
 

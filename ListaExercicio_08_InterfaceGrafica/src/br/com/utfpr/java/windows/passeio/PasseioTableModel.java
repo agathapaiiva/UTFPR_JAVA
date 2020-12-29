@@ -70,4 +70,9 @@ public class PasseioTableModel extends AbstractTableModel{
 		}
 		return null;
 	}
+	
+	public void removeTable() {
+		this.bdVeiculos.getVeiculoDePasseio().removeAll(bdVeiculos.getVeiculoDePasseio());
+		this.fireTableDataChanged();
+	}
 }

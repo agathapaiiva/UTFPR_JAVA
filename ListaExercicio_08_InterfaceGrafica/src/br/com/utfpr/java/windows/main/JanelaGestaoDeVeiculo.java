@@ -57,13 +57,11 @@ public class JanelaGestaoDeVeiculo implements ActionListener{
 		if(evt.getSource().equals(buttonPasseio)) {
 			JanelaGestaoPasseio gestaoPasseio = new JanelaGestaoPasseio();
 			gestaoPasseio.criarJanelaGestaoPasseio();
-		//	janelaGestaoVeiculo.dispose();
 		} 
 		
 		if(evt.getSource().equals(buttonCarga)) {
 			JanelaGestaoCarga gestaoCarga = new JanelaGestaoCarga();
 			gestaoCarga.criarJanelaGestaoCarga();
-		//	janelaGestaoVeiculo.dispose(); 
 		}
 	}
 	
